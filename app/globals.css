@@ -1,0 +1,89 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@layer base {
+  :root {
+    --background: 210 40% 98%;
+    --foreground: 222 47% 11%;
+  }
+
+  .dark {
+    --background: 224 71% 4%;
+    --foreground: 210 20% 98%;
+  }
+}
+
+@theme {
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-outfit), var(--font-inter), sans-serif;
+  --font-serif: var(--font-playfair), serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+
+  --color-primary: #38bdf8;
+  --color-secondary: #2dd4bf;
+  --color-accent: #0ea5e9;
+  
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-pulse-slow: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+}
+
+@layer base {
+  body {
+    @apply antialiased bg-slate-50 text-slate-900 dark:bg-[#030712] dark:text-slate-100 selection:bg-cyan-500/30 selection:text-white transition-colors duration-300;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+}
+
+@layer utilities {
+  .accent-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-[#0284c7] via-[#0ea5e9] to-[#06b6d4] dark:from-[#38bdf8] dark:via-[#2dd4bf] dark:to-[#0ea5e9];
+  }
+
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-[#0284c7] via-[#0ea5e9] to-[#06b6d4] dark:from-[#38bdf8] dark:via-[#2dd4bf] dark:to-[#0ea5e9];
+  }
+
+  .glow-primary {
+    @apply shadow-[0_0_50px_-12px_rgba(56,189,248,0.4)];
+  }
+
+  .skill-tag {
+    @apply bg-teal-50 dark:bg-[#07242e]/60 border border-teal-500/30 px-3 py-1 rounded-full text-[11px] font-medium text-teal-800 dark:text-[#7dd3fc];
+  }
+}
+
+/* 
+  Sleek Glassmorphism for Cards matching light and dark themes
+*/
+.glass {
+  @apply bg-white/80 dark:bg-[#08121d]/85 backdrop-blur-xl border border-slate-200/90 dark:border-slate-800/80 rounded-[24px] text-slate-900 dark:text-slate-100 shadow-[0_4px_24px_rgba(0,0,0,0.06)] dark:shadow-[0_8px_30px_rgba(0,0,0,0.5)];
+}
+
+.glass-dark {
+  @apply bg-slate-100/90 dark:bg-[#050c14]/90 backdrop-blur-2xl border border-slate-300/80 dark:border-slate-800/90 text-slate-900 dark:text-slate-100;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-slate-300 dark:bg-[#0c2b36];
+  border-radius: 9999px;
+  transition: background-color 0.2s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-cyan-500 dark:bg-[#38bdf8];
+}
